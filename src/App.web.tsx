@@ -49,6 +49,7 @@ import {Shell} from '#/view/shell/index'
 import {ThemeProvider as Alf} from '#/alf'
 import {useColorModeTheme} from '#/alf/util/useColorModeTheme'
 import {Provider as ContextMenuProvider} from '#/components/ContextMenu'
+import {FaviconBadge} from '#/components/FaviconBadge'
 import {useLandingEntry} from '#/components/hooks/useLandingEntry'
 import {Provider as IntentDialogProvider} from '#/components/intents/IntentDialogs'
 import {Provider as LightboxStateProvider} from '#/components/Lightbox/state'
@@ -156,6 +157,7 @@ function InnerApp() {
                                                               <TranslateOnDeviceProvider>
                                                                 <HotkeysProvider>
                                                                   <Shell />
+                                                                  <FaviconBadge />
                                                                   <ToastOutlet />
                                                                 </HotkeysProvider>
                                                               </TranslateOnDeviceProvider>

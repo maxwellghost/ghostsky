@@ -140,15 +140,24 @@ async function handlePost(handle, rkey, requestUrl) {
 
   const text = (post.record && post.record.text) || ''
   const authorName = profile.displayName || profile.handle
-  // Collect every image from the post embed. Two shapes carry images:
+  // Collect every image from the post embed. Shapes that carry visuals:
   //   app.bsky.embed.images#view          -> embed.images[]
-  //   app.bsky.embed.recordWithMedia#view -> embed.media.images[]
+  //   app.bsky.embed.video#view           -> embed.thumbnail (poster frame)
+  //   app.bsky.embed.recordWithMedia#view -> embed.media.images[] or
+  //                                          embed.media.thumbnail (video)
   let imageArr = []
   if (post.embed) {
     if (Array.isArray(post.embed.images)) {
       imageArr = post.embed.images
+    } else if (post.embed.thumbnail) {
+      // Video post — use the poster frame as a static image. (We deliberately
+      // do NOT emit og:video tags: a type:video embed hides the caption text
+      // in Discord, and the caption matters more than inline playback.)
+      imageArr = [{fullsize: post.embed.thumbnail}]
     } else if (post.embed.media && Array.isArray(post.embed.media.images)) {
       imageArr = post.embed.media.images
+    } else if (post.embed.media && post.embed.media.thumbnail) {
+      imageArr = [{fullsize: post.embed.media.thumbnail}]
     }
   }
   const images = imageArr

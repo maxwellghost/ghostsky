@@ -34,7 +34,7 @@ export function Logotype({
           lineHeight: fontSize * 1.1,
           fontWeight: '800',
           letterSpacing: -0.5,
-          color: (fill as string) || pal.text.color,
+          color: fill || pal.text.color,
         },
         style,
       ]}>

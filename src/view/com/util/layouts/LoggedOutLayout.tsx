@@ -20,7 +20,11 @@ export const LoggedOutLayout = ({
   const {isMobile, isTabletOrMobile} = useWebMediaQueries()
   const t = useTheme()
   const sideBg = t.atoms.bg_contrast_25
-  const contentBg = [t.atoms.bg, t.atoms.border_contrast_low, {borderLeftWidth: 1}]
+  const contentBg = [
+    t.atoms.bg,
+    t.atoms.border_contrast_low,
+    {borderLeftWidth: 1},
+  ]
 
   if (isMobile) {
     if (scrollable) {

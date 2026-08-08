@@ -172,9 +172,9 @@ export function NoAccessScreen() {
                         </Text>
                         <Text style={[textStyles]}>
                           <Trans>
-                            You are accessing Ghostsky from a region that legally
-                            requires us to verify your age before allowing you
-                            to access the app.
+                            You are accessing Ghostsky from a region that
+                            legally requires us to verify your age before
+                            allowing you to access the app.
                           </Trans>
                         </Text>
 

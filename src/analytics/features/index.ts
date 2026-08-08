@@ -14,6 +14,9 @@ setPolyfills({
     getItem: key => {
       return CACHE.getString(key) ?? null
     },
+    // MMKV writes are synchronous, but GrowthBook's localStorage polyfill
+    // expects a Promise-returning setItem.
+    // eslint-disable-next-line @typescript-eslint/require-await
     setItem: async (key, value) => {
       CACHE.set(key, value)
     },
@@ -52,6 +55,8 @@ export const init = Promise.resolve()
  *
  * GHOST: no-op — see note on `init` above, same reasoning.
  */
+// The async signature is kept so callers keep their Promise contract.
+// eslint-disable-next-line @typescript-eslint/require-await
 export async function refresh(_args: {strategy: FeatureFetchStrategy}) {
   return
 }

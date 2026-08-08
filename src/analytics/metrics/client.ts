@@ -1,4 +1,3 @@
-import {onAppStateChange} from '#/lib/appState'
 import {isNetworkError} from '#/lib/strings/errors'
 import {Logger} from '#/logger'
 import * as env from '#/env'

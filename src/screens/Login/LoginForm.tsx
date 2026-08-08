@@ -442,9 +442,9 @@ export const LoginForm = ({
                         )
                       }}>
                       app password
-                    </InlineLinkText>
-                    {' '}instead of your main account password. App passwords
-                    look like{' '}
+                    </InlineLinkText>{' '}
+                    instead of your main account password. App passwords look
+                    like{' '}
                     <Text style={[a.text_sm, {fontFamily: 'monospace'}]}>
                       xxxx-xxxx-xxxx-xxxx
                     </Text>

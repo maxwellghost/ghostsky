@@ -106,12 +106,6 @@
   "src/analytics/features/index.ts": {
     "@typescript-eslint/no-floating-promises": {
       "count": 1
-    },
-    "@typescript-eslint/no-misused-promises": {
-      "count": 1
-    },
-    "@typescript-eslint/require-await": {
-      "count": 1
     }
   },
   "src/analytics/identifiers/session.test.ts": {
@@ -125,17 +119,6 @@
   "src/analytics/metadata.ts": {
     "@typescript-eslint/no-explicit-any": {
       "count": 1
-    }
-  },
-  "src/analytics/metrics/client.test.ts": {
-    "@typescript-eslint/no-explicit-any": {
-      "count": 1
-    },
-    "@typescript-eslint/no-unsafe-member-access": {
-      "count": 8
-    },
-    "@typescript-eslint/require-await": {
-      "count": 5
     }
   },
   "src/analytics/metrics/client.ts": {

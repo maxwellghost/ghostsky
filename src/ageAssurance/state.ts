@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react'
+import {useEffect, useState} from 'react'
 import type * as AgeRange from 'expo-age-range'
 import {
   type AppBskyAgeassuranceDefs,
@@ -6,13 +6,11 @@ import {
 } from '@atproto/api'
 
 import {getAge} from '#/lib/strings/time'
-import {useSession} from '#/state/session'
 import {
   getConfigFromCache,
   getDeviceSignalsFromCacheForRegion,
   getOtherRequiredDataFromCache,
   getServerStateFromCache,
-  useAgeAssuranceServerDataContext,
 } from '#/ageAssurance/data'
 import {logger} from '#/ageAssurance/logger'
 import {
@@ -29,7 +27,7 @@ import {
   getAgeAssuranceRegionConfigForGeolocation,
   getAgeAssuranceRegionConfigWithFallback,
 } from '#/ageAssurance/util'
-import {type Geolocation, useGeolocation} from '#/geolocation'
+import {type Geolocation} from '#/geolocation'
 import {device} from '#/storage'
 
 /**

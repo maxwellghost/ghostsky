@@ -30,6 +30,8 @@ export const DEFAULT_APP_CONFIG_RESPONSE: AppConfigResponse = {
  * the network round-trip (and the console noise) and go straight to the
  * default config.
  */
+// The async signature is kept so callers keep their Promise contract.
+// eslint-disable-next-line @typescript-eslint/require-await
 async function fetchAppConfig(): Promise<AppConfigResponse | null> {
   return DEFAULT_APP_CONFIG_RESPONSE
 }

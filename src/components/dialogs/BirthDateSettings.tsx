@@ -176,9 +176,7 @@ function BirthdayInner({
         <Admonition type="error">
           <Trans>
             You must be at least 13 years old to use Ghostsky. Read our{' '}
-            <SimpleInlineLinkText
-              to="/support/tos"
-              label={l`Terms of Service`}>
+            <SimpleInlineLinkText to="/support/tos" label={l`Terms of Service`}>
               Terms of Service
             </SimpleInlineLinkText>{' '}
             for more information.

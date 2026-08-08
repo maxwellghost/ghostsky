@@ -157,8 +157,8 @@ export function ListHiddenScreen({
                 <Text style={[a.font_semi_bold]}>
                   {sanitizeHandle(list.creator.handle, '@')}
                 </Text>{' '}
-                – contains possible violations of Ghostsky's community guidelines
-                in its name or description.
+                – contains possible violations of Ghostsky's community
+                guidelines in its name or description.
               </Trans>
             )}
           </Text>

@@ -122,8 +122,8 @@ function Inner({style}: ViewStyleProp & {}) {
           {isBlocked ? (
             <Admonition type="warning">
               <Trans>
-                You are currently unable to access Ghostsky's Age Assurance flow.
-                Please{' '}
+                You are currently unable to access Ghostsky's Age Assurance
+                flow. Please{' '}
                 <InlineLinkText
                   label={l`Contact our moderation team`}
                   {...createStaticClick(() => {

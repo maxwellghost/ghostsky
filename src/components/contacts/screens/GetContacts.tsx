@@ -233,8 +233,9 @@ export function GetContacts({
         </Text>
         <Text style={style}>
           <Trans>
-            Ghostsky helps friends find each other by creating an encoded digital
-            fingerprint, called a "hash", and then looking for matching hashes.
+            Ghostsky helps friends find each other by creating an encoded
+            digital fingerprint, called a "hash", and then looking for matching
+            hashes.
           </Trans>
         </Text>
         <Text style={style}>

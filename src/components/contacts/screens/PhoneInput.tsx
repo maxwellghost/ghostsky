@@ -287,7 +287,9 @@ function LegalDisclaimer() {
       </Text>
       <Text style={style}>
         &bull;{' '}
-        <Trans>Held by Ghostsky for 7 days to prevent abuse, then deleted</Trans>
+        <Trans>
+          Held by Ghostsky for 7 days to prevent abuse, then deleted
+        </Trans>
       </Text>
       <Text style={style}>
         &bull;{' '}

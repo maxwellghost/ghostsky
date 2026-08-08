@@ -22,6 +22,8 @@ export const DEFAULT_LIVE_EVENTS = {
   feeds: [],
 }
 
+// The async signature is kept so callers keep their Promise contract.
+// eslint-disable-next-line @typescript-eslint/require-await
 async function fetchLiveEvents(): Promise<LiveEventsWorkerResponse | null> {
   /**
    * GHOST: this service is Bluesky PBC infra, CORS-locked to bsky.app's own

@@ -1,12 +1,8 @@
+import {onAppStateChange} from '#/lib/appState'
 import {MetricsClient} from './client'
 
-let appStateCallback: (state: string) => void
-
 jest.mock('#/lib/appState', () => ({
-  onAppStateChange: jest.fn(cb => {
-    appStateCallback = cb
-    return {remove: jest.fn()}
-  }),
+  onAppStateChange: jest.fn(() => ({remove: jest.fn()})),
 }))
 
 jest.mock('#/logger', () => ({
@@ -30,18 +26,18 @@ type TestEvents = {
   view: {screen: string}
 }
 
+/**
+ * GHOST: telemetry is disabled in this fork — `track()` and `start()` are
+ * deliberate no-ops (see client.ts). These tests assert that nothing is
+ * queued, scheduled, subscribed, or sent, so a future upstream merge can't
+ * silently reinstate the reporting to Bluesky's endpoint.
+ */
 describe('MetricsClient', () => {
   let fetchMock: jest.Mock
-  let fetchRequests: {body: any}[]
 
   beforeEach(() => {
     jest.useFakeTimers({advanceTimers: true})
-    fetchRequests = []
-    fetchMock = jest.fn().mockImplementation(async (_url, options) => {
-      const body = JSON.parse(options.body)
-      fetchRequests.push({body})
-      return {ok: true, status: 200}
-    })
+    fetchMock = jest.fn().mockResolvedValue({ok: true, status: 200})
     global.fetch = fetchMock
   })
 
@@ -50,127 +46,45 @@ describe('MetricsClient', () => {
     jest.clearAllMocks()
   })
 
-  it('flushes events on interval', async () => {
+  it('track() queues nothing, so flush() sends no request', async () => {
     const client = new MetricsClient<TestEvents>()
     client.track('click', {button: 'submit'})
     client.track('view', {screen: 'home'})
 
-    expect(fetchRequests).toHaveLength(0)
+    client.flush()
+    await jest.advanceTimersByTimeAsync(0)
 
-    // Advance past the 10 second interval
-    await jest.advanceTimersByTimeAsync(10_000)
-
-    expect(fetchRequests).toHaveLength(1)
-    expect(fetchRequests[0].body.events).toHaveLength(2)
-    expect(fetchRequests[0].body.events[0].event).toBe('click')
-    expect(fetchRequests[0].body.events[1].event).toBe('view')
+    expect(fetchMock).not.toHaveBeenCalled()
   })
 
-  it('flushes when maxBatchSize is exceeded', async () => {
+  it('start() schedules no flush interval', async () => {
+    const client = new MetricsClient<TestEvents>()
+    client.start()
+    client.track('click', {button: 'submit'})
+
+    // Well past the 10 second interval the original client used.
+    await jest.advanceTimersByTimeAsync(60_000)
+
+    expect(fetchMock).not.toHaveBeenCalled()
+  })
+
+  it('start() subscribes to no app-state changes', () => {
+    const client = new MetricsClient<TestEvents>()
+    client.start()
+
+    expect(jest.mocked(onAppStateChange)).not.toHaveBeenCalled()
+  })
+
+  it('exceeding maxBatchSize still sends nothing', async () => {
     const client = new MetricsClient<TestEvents>()
     client.maxBatchSize = 5
 
-    // Add events up to maxBatchSize (should not flush yet)
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       client.track('click', {button: `btn-${i}`})
     }
 
-    expect(fetchRequests).toHaveLength(0)
+    await jest.advanceTimersByTimeAsync(60_000)
 
-    // One more event should trigger flush (> maxBatchSize)
-    client.track('click', {button: 'btn-trigger'})
-
-    // Allow microtasks to run
-    await jest.advanceTimersByTimeAsync(0)
-
-    expect(fetchRequests).toHaveLength(1)
-    expect(fetchRequests[0].body.events).toHaveLength(6)
-  })
-
-  it('retries failed events once on 500 response', async () => {
-    let requestCount = 0
-
-    fetchMock.mockImplementation(async (_url, options) => {
-      requestCount++
-      const body = JSON.parse(options.body)
-
-      if (requestCount === 1) {
-        // First request fails with 500 - "Failed to fetch" triggers isNetworkError
-        return {
-          ok: false,
-          status: 500,
-          text: async () => 'Internal Server Error',
-        }
-      }
-
-      // Retry succeeds
-      fetchRequests.push({body})
-      return {ok: true, status: 200}
-    })
-
-    const client = new MetricsClient<TestEvents>()
-    client.track('click', {button: 'submit'})
-
-    // Trigger flush via interval
-    await jest.advanceTimersByTimeAsync(10_000)
-
-    expect(requestCount).toBe(1)
-    expect(fetchRequests).toHaveLength(0)
-
-    // Simulate app coming to foreground to trigger retry
-    appStateCallback('active')
-    await jest.advanceTimersByTimeAsync(0)
-
-    expect(requestCount).toBe(2)
-    expect(fetchRequests).toHaveLength(1)
-    expect(fetchRequests[0].body.events).toHaveLength(1)
-    expect(fetchRequests[0].body.events[0].event).toBe('click')
-  })
-
-  it('does not retry more than once', async () => {
-    let requestCount = 0
-
-    fetchMock.mockImplementation(async () => {
-      requestCount++
-      // Always fail with network-like error
-      return {
-        ok: false,
-        status: 500,
-        text: async () => 'Internal Server Error',
-      }
-    })
-
-    const client = new MetricsClient<TestEvents>()
-    client.track('click', {button: 'submit'})
-
-    // First flush fails
-    await jest.advanceTimersByTimeAsync(10_000)
-
-    expect(requestCount).toBe(1)
-
-    // Retry also fails
-    appStateCallback('active')
-    await jest.advanceTimersByTimeAsync(0)
-
-    expect(requestCount).toBe(2)
-
-    // Another foreground event should not retry again (events are dropped)
-    appStateCallback('active')
-    await jest.advanceTimersByTimeAsync(0)
-
-    expect(requestCount).toBe(2) // No additional requests
-  })
-
-  it('flushes when app goes to background', async () => {
-    const client = new MetricsClient<TestEvents>()
-    client.track('click', {button: 'submit'})
-
-    expect(fetchRequests).toHaveLength(0)
-
-    // Simulate app going to background
-    appStateCallback('background')
-    await jest.advanceTimersByTimeAsync(0)
-
-    expect(fetchRequests).toHaveLength(1)
+    expect(fetchMock).not.toHaveBeenCalled()
   })
 })

@@ -128,7 +128,9 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
                         msg`Learn more about what is public on Ghostsky.`,
                       )}
                       to="https://blueskyweb.zendesk.com/hc/en-us/articles/15835264007693-Data-Privacy">
-                      <Trans>Learn more about what is public on Ghostsky.</Trans>
+                      <Trans>
+                        Learn more about what is public on Ghostsky.
+                      </Trans>
                     </InlineLinkText>
                   </Admonition.Text>
                 </Admonition.Content>

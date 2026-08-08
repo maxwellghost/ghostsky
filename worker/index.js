@@ -31,7 +31,7 @@ const BOT_UA_PATTERNS = [
 // Workers are stateless and multi-instance, so this won't stop a fully
 // distributed attack, but it will catch a single abusive crawler effectively.
 const RATE_LIMIT_WINDOW_MS = 10_000 // 10 seconds
-const RATE_LIMIT_MAX = 60            // max requests per IP per window
+const RATE_LIMIT_MAX = 60 // max requests per IP per window
 const rateLimitMap = new Map()
 
 function isRateLimited(ip) {
@@ -56,7 +56,10 @@ function isBot(ua) {
 function esc(str) {
   return String(str || '').replace(
     /[&<>"']/g,
-    c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[c],
+    c =>
+      ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[
+        c
+      ],
   )
 }
 
@@ -112,7 +115,7 @@ function ogResponse(html) {
     headers: {
       'content-type': 'text/html;charset=UTF-8',
       'cache-control': 'public, max-age=300',
-      'vary': 'User-Agent',
+      vary: 'User-Agent',
       'x-content-type-options': 'nosniff',
       'x-frame-options': 'SAMEORIGIN',
       'referrer-policy': 'strict-origin-when-cross-origin',
@@ -160,9 +163,7 @@ async function handlePost(handle, rkey, requestUrl) {
       imageArr = [{fullsize: post.embed.media.thumbnail}]
     }
   }
-  const images = imageArr
-    .map(img => img && img.fullsize)
-    .filter(Boolean)
+  const images = imageArr.map(img => img && img.fullsize).filter(Boolean)
 
   return ogPage({
     title: `${authorName} (@${profile.handle})`,
@@ -198,7 +199,10 @@ export default {
     const ip = request.headers.get('cf-connecting-ip') || ''
 
     // Rate limit bot traffic on profile/post paths
-    if (isBot(ua) && (url.pathname.startsWith('/profile/') || url.pathname === '/oembed')) {
+    if (
+      isBot(ua) &&
+      (url.pathname.startsWith('/profile/') || url.pathname === '/oembed')
+    ) {
       if (isRateLimited(ip)) {
         return new Response('Too Many Requests', {
           status: 429,
@@ -264,16 +268,16 @@ export default {
 
     if (isBot(ua)) {
       // /profile/{handle}/post/{rkey}
-      const postMatch = url.pathname.match(/^\/profile\/([^/]+)\/post\/([^/]+)\/?$/)
+      const postMatch = url.pathname.match(
+        /^\/profile\/([^/]+)\/post\/([^/]+)\/?$/,
+      )
       // /profile/{handle}
       const profileMatch = url.pathname.match(/^\/profile\/([^/]+)\/?$/)
 
       if (postMatch || profileMatch) {
         // Synthetic cache key — never collides with real asset URLs, so a
         // cached OG page can never be served to a human and vice versa.
-        const cacheKey = new Request(
-          `${url.origin}${url.pathname}?__og_bot=1`,
-        )
+        const cacheKey = new Request(`${url.origin}${url.pathname}?__og_bot=1`)
         const cached = await caches.default.match(cacheKey)
         if (cached) return cached
 

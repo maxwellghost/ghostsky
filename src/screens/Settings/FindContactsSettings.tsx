@@ -568,8 +568,8 @@ function StatusFooter({syncedAt}: {syncedAt: string}) {
         </Text>
         <Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
           <Trans>
-            Ghostsky stores your contacts as encoded data. Removing your contacts
-            will immediately delete this data.
+            Ghostsky stores your contacts as encoded data. Removing your
+            contacts will immediately delete this data.
           </Trans>
         </Text>
         <Button

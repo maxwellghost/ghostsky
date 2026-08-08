@@ -1,8 +1,8 @@
 import {Text, View} from 'react-native'
 import {type PathProps, type SvgProps} from 'react-native-svg'
 
-import {useTheme} from '#/alf'
 import {Logomark} from '#/view/icons/Logomark'
+import {useTheme} from '#/alf'
 
 // GHOST: same situation as Logotype.tsx — the original was a hand-drawn
 // vector wordmark ("Bluesky" spelled out as bezier letterforms) that can't
@@ -35,7 +35,7 @@ export function LogomarkWithType({
           fontSize,
           fontWeight: '800',
           letterSpacing: -0.5,
-          color: (fill as string) || t.atoms.text.color,
+          color: fill || t.atoms.text.color,
         }}>
         Ghostsky
       </Text>

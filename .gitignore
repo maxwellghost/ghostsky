@@ -133,4 +133,7 @@ bskyweb/static/media/*.svg
 
 # superpowers plugin plans/specs — local-only workspace
 docs/superpowers/
-.claude/worktrees
+
+# local agent tooling config — not part of the project
+.claude/
+CLAUDE.md

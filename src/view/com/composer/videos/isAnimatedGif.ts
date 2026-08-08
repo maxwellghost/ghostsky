@@ -1,5 +1,5 @@
 /**
- * Checks if a GIF is animated. Cooked up by Claude, validated with some examples.
+ * Checks if a GIF is animated. Validated against sample files.
  * @param bytes - The GIF bytes, as a Uint8Array.
  * @returns An object with properties isGif, isAnimated, and frames.
  */

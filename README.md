@@ -4,8 +4,6 @@ This is a soft fork of [social app](https://github.com/bluesky-social/social-app
 
 **Web: [ghostsky.app](https://ghostsky.app)**
 
-Made with assistance from Claude
-
 This is a self-hosted fork operated by one person for personal use
 
 @dev.ghostsky.app

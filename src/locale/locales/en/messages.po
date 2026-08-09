@@ -1727,7 +1727,7 @@ msgstr "Anyone can request to join"
 
 #: src/screens/Settings/ActivityPrivacySettings.tsx:112
 #: src/screens/Settings/ActivityPrivacySettings.tsx:117
-#: src/screens/Settings/PrivacyAndSecuritySettings.tsx:163
+#: src/screens/Settings/PrivacyAndSecuritySettings.tsx:165
 msgid "Anyone who follows me"
 msgstr ""
 
@@ -1994,8 +1994,8 @@ msgstr ""
 #: src/screens/Login/LoginForm.tsx:556
 #: src/screens/Login/SetNewPasswordForm.tsx:157
 #: src/screens/Login/SetNewPasswordForm.tsx:163
-#: src/screens/Messages/components/ChatDisabled.tsx:164
 #: src/screens/Messages/components/ChatDisabled.tsx:166
+#: src/screens/Messages/components/ChatDisabled.tsx:168
 #: src/screens/Messages/components/InviteLinkDialog.tsx:276
 #: src/screens/Messages/components/InviteLinkDialog.tsx:304
 #: src/screens/Messages/Inbox.tsx:233
@@ -2324,7 +2324,7 @@ msgstr "By <0>{ownerDisplayName}</0>"
 msgid "By clicking \"Continue\" you acknowledge that you understand and agree to these updates."
 msgstr ""
 
-#: src/components/contacts/screens/PhoneInput.tsx:297
+#: src/components/contacts/screens/PhoneInput.tsx:299
 msgid "By continuing, you consent to this use. You may change your mind any time by visiting settings. <0>Learn more</0>"
 msgstr ""
 
@@ -2355,8 +2355,8 @@ msgstr "Camera access needed"
 #: src/components/activity-notifications/SubscribeProfileDialog.tsx:213
 #: src/components/ageAssurance/AgeAssuranceAppealDialog.tsx:133
 #: src/components/ageAssurance/AgeAssuranceAppealDialog.tsx:139
-#: src/components/contacts/screens/GetContacts.tsx:292
-#: src/components/contacts/screens/GetContacts.tsx:297
+#: src/components/contacts/screens/GetContacts.tsx:293
+#: src/components/contacts/screens/GetContacts.tsx:298
 #: src/components/dialogs/DeviceLocationRequestDialog.tsx:141
 #: src/components/dialogs/DeviceLocationRequestDialog.tsx:146
 #: src/components/dialogs/EmailDialog/screens/Manage2FA/Enable.tsx:122
@@ -4014,8 +4014,8 @@ msgstr ""
 #: src/components/contacts/components/InviteInfo.tsx:79
 #: src/components/contacts/screens/ViewMatches.tsx:395
 #: src/components/contacts/screens/ViewMatches.tsx:412
-#: src/components/dialogs/BirthDateSettings.tsx:193
-#: src/components/dialogs/BirthDateSettings.tsx:200
+#: src/components/dialogs/BirthDateSettings.tsx:191
+#: src/components/dialogs/BirthDateSettings.tsx:198
 #: src/components/dialogs/EmailDialog/screens/Verify.tsx:195
 #: src/components/dialogs/EmailDialog/screens/Verify.tsx:200
 #: src/components/dialogs/LanguageSelectDialog.tsx:327
@@ -4488,7 +4488,7 @@ msgstr ""
 msgid "Error loading post"
 msgstr ""
 
-#: src/screens/Settings/PrivacyAndSecuritySettings.tsx:154
+#: src/screens/Settings/PrivacyAndSecuritySettings.tsx:156
 msgid "Error loading preference"
 msgstr ""
 
@@ -5177,8 +5177,8 @@ msgstr "Find and invite friends"
 msgid "Find Contacts"
 msgstr ""
 
-#: src/components/contacts/screens/GetContacts.tsx:273
-#: src/components/contacts/screens/GetContacts.tsx:287
+#: src/components/contacts/screens/GetContacts.tsx:274
+#: src/components/contacts/screens/GetContacts.tsx:288
 msgid "Find my friends"
 msgstr ""
 
@@ -5211,7 +5211,7 @@ msgstr "Find your friends on Ghostsky by verifying your phone number and matchin
 msgid "Find your people"
 msgstr ""
 
-#: src/components/contacts/screens/GetContacts.tsx:281
+#: src/components/contacts/screens/GetContacts.tsx:282
 msgid "Finding friends..."
 msgstr ""
 
@@ -6231,7 +6231,7 @@ msgstr ""
 msgid "Human trafficking"
 msgstr ""
 
-#: src/components/contacts/screens/GetContacts.tsx:267
+#: src/components/contacts/screens/GetContacts.tsx:268
 msgid "I consent to Ghostsky using my contacts for mutual friend discovery and to retain hashed data for matching until I opt out."
 msgstr "I consent to Ghostsky using my contacts for mutual friend discovery and to retain hashed data for matching until I opt out."
 
@@ -6819,7 +6819,7 @@ msgstr "Learn more about Ghostsky"
 msgid "Learn more about how inviting friends works"
 msgstr ""
 
-#: src/components/contacts/screens/PhoneInput.tsx:303
+#: src/components/contacts/screens/PhoneInput.tsx:305
 #: src/screens/Onboarding/StepFindContactsIntro/index.tsx:53
 #: src/screens/Settings/FindContactsSettings.tsx:140
 msgctxt "english-only-resource"
@@ -8054,7 +8054,7 @@ msgstr ""
 
 #: src/screens/Settings/ActivityPrivacySettings.tsx:130
 #: src/screens/Settings/ActivityPrivacySettings.tsx:135
-#: src/screens/Settings/PrivacyAndSecuritySettings.tsx:160
+#: src/screens/Settings/PrivacyAndSecuritySettings.tsx:162
 msgctxt "enable for"
 msgid "No one"
 msgstr ""
@@ -8281,7 +8281,7 @@ msgid "Oh no!"
 msgstr ""
 
 #. Confirm button text.
-#: src/components/contacts/screens/GetContacts.tsx:317
+#: src/components/contacts/screens/GetContacts.tsx:318
 #: src/screens/Profile/Header/ProfileHeaderLabeler.tsx:226
 #: src/screens/Search/modules/ExploreInterestsCard.tsx:49
 #: src/screens/Settings/AppIconSettings/index.tsx:46
@@ -8376,7 +8376,7 @@ msgstr "Only followers can join this group chat."
 
 #: src/screens/Settings/ActivityPrivacySettings.tsx:121
 #: src/screens/Settings/ActivityPrivacySettings.tsx:126
-#: src/screens/Settings/PrivacyAndSecuritySettings.tsx:158
+#: src/screens/Settings/PrivacyAndSecuritySettings.tsx:160
 msgid "Only followers who I follow"
 msgstr ""
 
@@ -9092,7 +9092,7 @@ msgstr ""
 msgid "Please explain why you think this label was incorrectly applied by {0}"
 msgstr ""
 
-#: src/screens/Messages/components/ChatDisabled.tsx:143
+#: src/screens/Messages/components/ChatDisabled.tsx:145
 msgid "Please explain why you think your chats were incorrectly disabled"
 msgstr ""
 
@@ -10304,7 +10304,7 @@ msgstr "Reveal password"
 msgid "Sad GIFs"
 msgstr "Sad GIFs"
 
-#: src/components/dialogs/BirthDateSettings.tsx:200
+#: src/components/dialogs/BirthDateSettings.tsx:198
 #: src/components/dialogs/lists/CreateOrEditListDialog.tsx:309
 #: src/components/dialogs/lists/CreateOrEditListDialog.tsx:324
 #: src/components/dialogs/PostInteractionSettingsDialog.tsx:668
@@ -10327,7 +10327,7 @@ msgstr "Sad GIFs"
 msgid "Save"
 msgstr ""
 
-#: src/components/dialogs/BirthDateSettings.tsx:193
+#: src/components/dialogs/BirthDateSettings.tsx:191
 msgid "Save birthdate"
 msgstr ""
 
@@ -11618,7 +11618,7 @@ msgstr ""
 msgid "Storage cleared, you need to restart the app now."
 msgstr ""
 
-#: src/components/contacts/screens/PhoneInput.tsx:294
+#: src/components/contacts/screens/PhoneInput.tsx:296
 msgid "Stored as part of a secure code for matching with others"
 msgstr ""
 
@@ -11639,8 +11639,8 @@ msgstr "Streaming on Twitch? Set your live status on Ghostsky to add a badge to 
 #: src/components/SendErrorReportDialog.tsx:95
 #: src/features/liveNow/components/GoLiveDisabledDialog.tsx:139
 #: src/features/liveNow/components/GoLiveDisabledDialog.tsx:140
-#: src/screens/Messages/components/ChatDisabled.tsx:175
 #: src/screens/Messages/components/ChatDisabled.tsx:177
+#: src/screens/Messages/components/ChatDisabled.tsx:179
 msgid "Submit"
 msgstr ""
 
@@ -11920,7 +11920,7 @@ msgstr "Temporarily deactivate your account"
 msgid "Terms"
 msgstr ""
 
-#: src/components/dialogs/BirthDateSettings.tsx:181
+#: src/components/dialogs/BirthDateSettings.tsx:179
 #: src/components/PolicyUpdateOverlay/updates/202508/index.tsx:31
 #: src/components/PolicyUpdateOverlay/updates/202508/index.tsx:98
 #: src/Navigation.tsx:341
@@ -11938,7 +11938,7 @@ msgstr ""
 
 #: src/components/moderation/LabelsOnMeDialog.tsx:307
 #: src/features/liveNow/components/GoLiveDisabledDialog.tsx:122
-#: src/screens/Messages/components/ChatDisabled.tsx:142
+#: src/screens/Messages/components/ChatDisabled.tsx:144
 msgid "Text input field"
 msgstr ""
 
@@ -13734,7 +13734,7 @@ msgstr ""
 msgid "Watch now"
 msgstr ""
 
-#: src/components/contacts/screens/GetContacts.tsx:253
+#: src/components/contacts/screens/GetContacts.tsx:254
 msgid "We apply the highest privacy standards, and never share or sell your contact information."
 msgstr ""
 
@@ -13774,7 +13774,7 @@ msgstr "We couldn’t load this conversation’s settings"
 msgid "We couldn’t verify your hosting provider. Check your internet connection, or <0>set your hosting provider manually</0>."
 msgstr "We couldn’t verify your hosting provider. Check your internet connection, or <0>set your hosting provider manually</0>."
 
-#: src/components/contacts/screens/GetContacts.tsx:244
+#: src/components/contacts/screens/GetContacts.tsx:245
 msgid "We delete hashes after matches are made"
 msgstr ""
 
@@ -13799,11 +13799,11 @@ msgstr ""
 msgid "We need to verify your number before we can look for your friends. A verification code will be sent to this number."
 msgstr ""
 
-#: src/components/contacts/screens/GetContacts.tsx:241
+#: src/components/contacts/screens/GetContacts.tsx:242
 msgid "We never keep plain phone numbers"
 msgstr ""
 
-#: src/components/contacts/screens/GetContacts.tsx:247
+#: src/components/contacts/screens/GetContacts.tsx:248
 msgid "We only suggest follows if both people consent"
 msgstr ""
 
@@ -14220,7 +14220,7 @@ msgstr ""
 msgid "You can also download your chat data as a \"JSONL\" file. This file only includes chat messages that you have sent and does not include chat messages that you have received."
 msgstr ""
 
-#: src/components/contacts/screens/GetContacts.tsx:250
+#: src/components/contacts/screens/GetContacts.tsx:251
 msgid "You can always opt out and delete your data"
 msgstr ""
 
@@ -14572,7 +14572,7 @@ msgstr ""
 msgid "You'll follow these people right away"
 msgstr ""
 
-#: src/components/contacts/screens/GetContacts.tsx:314
+#: src/components/contacts/screens/GetContacts.tsx:315
 msgid "You'll need to go to the System Settings for Ghostsky and give permission if you want to use this feature."
 msgstr "You'll need to go to the System Settings for Ghostsky and give permission if you want to use this feature."
 
@@ -14615,7 +14615,7 @@ msgstr ""
 msgid "You've chosen to hide a word or tag within this post."
 msgstr ""
 
-#: src/components/contacts/screens/GetContacts.tsx:313
+#: src/components/contacts/screens/GetContacts.tsx:314
 msgid "You've denied access to your contacts"
 msgstr ""
 

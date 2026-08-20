@@ -647,8 +647,8 @@ importers:
         specifier: bluesky-social/react-native-progress
         version: https://codeload.github.com/bluesky-social/react-native-progress/tar.gz/5a372f4f2ce5feb26f4f47b6a4d187ab9b923ab4(react-native-svg@15.12.1(patch_hash=31401fa6ff01498773afb51a7b066821c471eb3e71b0764a10017938beed49e9)(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))
       react-native-qrcode-styled:
-        specifier: ^0.4.0
-        version: 0.4.0(react-native-svg@15.12.1(patch_hash=31401fa6ff01498773afb51a7b066821c471eb3e71b0764a10017938beed49e9)(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
+        specifier: ^0.3.3
+        version: 0.3.3(react-native-svg@15.12.1(patch_hash=31401fa6ff01498773afb51a7b066821c471eb3e71b0764a10017938beed49e9)(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
       react-native-reanimated:
         specifier: 3.19.1
         version: 3.19.1(patch_hash=97a1967f37a4213fbab59e1fd59a1bf859b5efc79af5e1b528a47fe488e6c5d6)(@babel/core@7.29.0)(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
@@ -751,7 +751,7 @@ importers:
         version: 3.6.1(webpack@5.106.2(postcss@8.5.14))
       '@testing-library/react-native':
         specifier: ^13.2.0
-        version: 13.3.3(jest@29.7.0(@types/node@24.12.4))(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react-test-renderer@19.1.0(react@19.2.8))(react@19.2.8)
+        version: 13.3.3(jest@29.7.0(@types/node@24.12.4))(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react-test-renderer@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/jest':
         specifier: 29.5.14
         version: 29.5.14
@@ -857,6 +857,9 @@ importers:
       react-refresh:
         specifier: ^0.14.0
         version: 0.14.2
+      react-test-renderer:
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
       svgo:
         specifier: ^3.3.2
         version: 3.3.3
@@ -8518,8 +8521,8 @@ packages:
     peerDependencies:
       react-native-svg: '*'
 
-  react-native-qrcode-styled@0.4.0:
-    resolution: {integrity: sha512-j5C5LFOr9KdAqm1snQX8UQH9RFRSH4FY1/7Ts/UvtR/5A9rmb61ZzIIW5d0RteY1D+DWVfnXDMhLmTJXXRgKpg==}
+  react-native-qrcode-styled@0.3.3:
+    resolution: {integrity: sha512-DjxFhFAJBY3y2FEBbWSpwtPaSjsEc5RutTHejxzfRNuyTzg1f5thplGyON8yx0kbi6h0h+57s8cH4aSFGj1mQg==}
     engines: {node: '>= 16.0.0'}
     peerDependencies:
       react: '*'
@@ -8640,6 +8643,11 @@ packages:
     resolution: {integrity: sha512-jXkSl3CpvPYEF+p/eGDLB4sPoDX8pKkYvRl9+rR8HxLY0X04vW7hCm1/0zHoUSjPZ3bDa+wXWNTDVIw/R8aDVw==}
     peerDependencies:
       react: ^19.1.0
+
+  react-test-renderer@19.2.8:
+    resolution: {integrity: sha512-GHKPaDRaNYU24PHTLG8Bx8VMY9t+qNfxQbt/Yjp7aMWBkKU6766SR0n6TnYu7P5I1MfEuAMUadqiyDHyI4Yy9Q==}
+    peerDependencies:
+      react: ^19.2.8
 
   react-textarea-autosize@8.5.9:
     resolution: {integrity: sha512-U1DGlIQN5AwgjTyOEnI1oCcMuEr1pv1qOtklB2l4nyMGbHzWrI0eFsYK0zos2YWqAolJyG0IWJaqWmWj5ETh0A==}
@@ -13342,14 +13350,14 @@ snapshots:
       '@tanstack/query-core': 5.101.4
       react: 19.2.8
 
-  '@testing-library/react-native@13.3.3(jest@29.7.0(@types/node@24.12.4))(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react-test-renderer@19.1.0(react@19.2.8))(react@19.2.8)':
+  '@testing-library/react-native@13.3.3(jest@29.7.0(@types/node@24.12.4))(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react-test-renderer@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       jest-matcher-utils: 30.4.1
       picocolors: 1.1.1
       pretty-format: 30.4.1
       react: 19.2.8
       react-native: 0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8)
-      react-test-renderer: 19.1.0(react@19.2.8)
+      react-test-renderer: 19.2.8(react@19.2.8)
       redent: 3.0.0
     optionalDependencies:
       jest: 29.7.0(@types/node@24.12.4)
@@ -18723,9 +18731,8 @@ snapshots:
       prop-types: 15.8.1
       react-native-svg: 15.12.1(patch_hash=31401fa6ff01498773afb51a7b066821c471eb3e71b0764a10017938beed49e9)(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
 
-  react-native-qrcode-styled@0.4.0(react-native-svg@15.12.1(patch_hash=31401fa6ff01498773afb51a7b066821c471eb3e71b0764a10017938beed49e9)(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8):
+  react-native-qrcode-styled@0.3.3(react-native-svg@15.12.1(patch_hash=31401fa6ff01498773afb51a7b066821c471eb3e71b0764a10017938beed49e9)(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-native@0.81.5(patch_hash=2656ac6deb71b92a4df4af4593d13ace6a5740936432e5e7e8ef32bc3cd05194)(@babel/core@7.29.0)(@types/react@19.2.18)(react@19.2.8))(react@19.2.8):
     dependencies:
-      fast-text-encoding: 1.0.6
       qrcode: 1.5.4
       react: 19.2.8
       react-fast-compare: 3.2.2
@@ -18902,6 +18909,12 @@ snapshots:
       react: 19.2.8
       react-is: 19.2.8
       scheduler: 0.26.0
+
+  react-test-renderer@19.2.8(react@19.2.8):
+    dependencies:
+      react: 19.2.8
+      react-is: 19.2.8
+      scheduler: 0.27.0
 
   react-textarea-autosize@8.5.9(@types/react@19.2.18)(react@19.2.8):
     dependencies:

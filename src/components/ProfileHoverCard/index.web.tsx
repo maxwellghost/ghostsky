@@ -1,4 +1,12 @@
-import {memo, useCallback, useEffect, useMemo, useReducer, useRef} from 'react'
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from 'react'
 import {View} from 'react-native'
 import {
   type AppBskyActorDefs,
@@ -15,18 +23,28 @@ import {makeProfileLink} from '#/lib/routes/links'
 import {type NavigationProp} from '#/lib/routes/types'
 import {sanitizeDisplayName} from '#/lib/strings/display-names'
 import {sanitizeHandle} from '#/lib/strings/handles'
+import {logger} from '#/logger'
 import {useProfileShadow} from '#/state/cache/profile-shadow'
+import {type Shadow} from '#/state/cache/types'
 import {useModerationOpts} from '#/state/preferences/moderation-opts'
-import {usePrefetchProfileQuery, useProfileQuery} from '#/state/queries/profile'
+import {
+  usePrefetchProfileQuery,
+  useProfileBlockMutationQueue,
+  useProfileMuteMutationQueue,
+  useProfileQuery,
+} from '#/state/queries/profile'
 import {useSession} from '#/state/session'
 import {formatCount} from '#/view/com/util/numeric/format'
 import {UserAvatar} from '#/view/com/util/UserAvatar'
 import {ProfileHeaderHandle} from '#/screens/Profile/Header/Handle'
 import {atoms as a, useTheme} from '#/alf'
 import {Button, ButtonIcon, ButtonText} from '#/components/Button'
+import {useDialogControl} from '#/components/Dialog'
 import {useFollowMethods} from '#/components/hooks/useFollowMethods'
 import {useRichText} from '#/components/hooks/useRichText'
 import {Check_Stroke2_Corner0_Rounded as Check} from '#/components/icons/Check'
+import {Mute_Stroke2_Corner0_Rounded as Mute} from '#/components/icons/Mute'
+import {PersonX_Stroke2_Corner0_Rounded as PersonX} from '#/components/icons/Person'
 import {PlusLarge_Stroke2_Corner0_Rounded as Plus} from '#/components/icons/Plus'
 import {
   KnownFollowers,
@@ -34,10 +52,12 @@ import {
 } from '#/components/KnownFollowers'
 import {InlineLinkText, Link} from '#/components/Link'
 import {Loader} from '#/components/Loader'
+import {BlockDialog} from '#/components/moderation/BlockDialog'
 import * as Pills from '#/components/Pills'
 import {Portal} from '#/components/Portal'
 import {ProfileBadges} from '#/components/ProfileBadges'
 import {RichText} from '#/components/RichText'
+import * as Toast from '#/components/Toast'
 import {Text} from '#/components/Typography'
 import {IS_WEB_TOUCH_DEVICE} from '#/env'
 import {useActorStatus} from '#/features/liveNow'
@@ -111,6 +131,28 @@ const HIDE_DURATION = 200
 
 export function ProfileHoverCardInner(props: ProfileHoverCardProps) {
   const navigation = useNavigation<NavigationProp>()
+
+  /**
+   * The block confirmation lives out here rather than inside the card, because
+   * the card unmounts as soon as the pointer leaves it and a dialog rendered
+   * inside it would be torn down along with it. This wrapper stays mounted for
+   * as long as the profile link itself is on screen.
+   *
+   * The nonce is the dialog's key, so blocking the same account twice in a row
+   * remounts the dialog and reopens it instead of silently doing nothing.
+   */
+  const blockNonce = useRef(0)
+  const [blockRequest, setBlockRequest] = useState<{
+    profile: Shadow<AppBskyActorDefs.ProfileViewDetailed>
+    nonce: number
+  } | null>(null)
+  const onRequestBlock = useCallback(
+    (profile: Shadow<AppBskyActorDefs.ProfileViewDetailed>) => {
+      blockNonce.current += 1
+      setBlockRequest({profile, nonce: blockNonce.current})
+    },
+    [],
+  )
 
   const {refs, floatingStyles} = useFloating({
     middleware: floatingMiddlewares,
@@ -337,23 +379,73 @@ export function ProfileHoverCardInner(props: ProfileHoverCardProps) {
             onPointerEnter={onPointerEnterCard}
             onPointerLeave={onPointerLeaveCard}>
             <div style={{willChange: 'transform', ...animationStyle}}>
-              <Card did={props.did} hide={onPress} navigation={navigation} />
+              <Card
+                did={props.did}
+                hide={onPress}
+                navigation={navigation}
+                onRequestBlock={onRequestBlock}
+              />
             </div>
           </div>
         </Portal>
       )}
+      {blockRequest && (
+        <HoverCardBlockDialog
+          key={blockRequest.nonce}
+          profile={blockRequest.profile}
+        />
+      )}
     </View>
   )
+}
+
+/**
+ * Opens the shared block confirmation as soon as it mounts. Mounted by
+ * ProfileHoverCardInner, which outlives the card itself.
+ */
+function HoverCardBlockDialog({
+  profile,
+}: {
+  profile: Shadow<AppBskyActorDefs.ProfileViewDetailed>
+}) {
+  const {_} = useLingui()
+  const control = useDialogControl()
+  const [queueBlock] = useProfileBlockMutationQueue(profile)
+
+  useEffect(() => {
+    control.open()
+    // Runs once on mount; the key prop remounts this for each new request.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const onBlock = useCallback(async () => {
+    try {
+      await queueBlock()
+      Toast.show(_(msg`Account blocked`))
+    } catch (err) {
+      const e = err as Error
+      if (e?.name !== 'AbortError') {
+        logger.error('Failed to block account from hover card', {message: e})
+        Toast.show(_(msg`There was an issue! ${e.toString()}`), {type: 'error'})
+      }
+    }
+  }, [queueBlock, _])
+
+  return <BlockDialog control={control} profile={profile} onBlock={onBlock} />
 }
 
 let Card = ({
   did,
   hide,
   navigation,
+  onRequestBlock,
 }: {
   did: string
   hide: () => void
   navigation: NavigationProp
+  onRequestBlock: (
+    profile: Shadow<AppBskyActorDefs.ProfileViewDetailed>,
+  ) => void
 }): React.ReactNode => {
   const t = useTheme()
 
@@ -395,7 +487,12 @@ let Card = ({
             onPressOpenProfile={onPressOpenProfile}
           />
         ) : (
-          <Inner profile={data} moderationOpts={moderationOpts} hide={hide} />
+          <Inner
+            profile={data}
+            moderationOpts={moderationOpts}
+            hide={hide}
+            onRequestBlock={onRequestBlock}
+          />
         )
       ) : (
         <View
@@ -417,10 +514,14 @@ function Inner({
   profile,
   moderationOpts,
   hide,
+  onRequestBlock,
 }: {
   profile: AppBskyActorDefs.ProfileViewDetailed
   moderationOpts: ModerationOpts
   hide: () => void
+  onRequestBlock: (
+    profile: Shadow<AppBskyActorDefs.ProfileViewDetailed>,
+  ) => void
 }) {
   const t = useTheme()
   const {_, i18n} = useLingui()
@@ -435,6 +536,33 @@ function Inner({
     profile: profileShadow,
     logContext: 'ProfileHoverCard',
   })
+  const [queueMute, queueUnmute] = useProfileMuteMutationQueue(profileShadow)
+  const isMuted = !!profileShadow.viewer?.muted
+
+  // Mute is instant: it's reversible and the whole point is clearing spam
+  // without leaving the feed. Block goes through the confirmation instead.
+  const onPressMute = useCallback(async () => {
+    try {
+      if (isMuted) {
+        await queueUnmute()
+        Toast.show(_(msg`Account unmuted`))
+      } else {
+        await queueMute()
+        Toast.show(_(msg`Account muted`))
+      }
+    } catch (err) {
+      const e = err as Error
+      if (e?.name !== 'AbortError') {
+        logger.error('Failed to toggle mute from hover card', {message: e})
+        Toast.show(_(msg`There was an issue! ${e.toString()}`), {type: 'error'})
+      }
+    }
+  }, [isMuted, queueMute, queueUnmute, _])
+
+  const onPressBlock = useCallback(() => {
+    hide()
+    onRequestBlock(profileShadow)
+  }, [hide, onRequestBlock, profileShadow])
   const isBlockedUser =
     profile.viewer?.blocking ||
     profile.viewer?.blockedBy ||
@@ -485,27 +613,49 @@ function Inner({
               <ButtonText>{_(msg`View profile`)}</ButtonText>
             </Link>
           ) : (
-            <Button
-              size="small"
-              color={profileShadow.viewer?.following ? 'secondary' : 'primary'}
-              variant="solid"
-              label={
-                profileShadow.viewer?.following
-                  ? _(msg`Following`)
-                  : _(msg`Follow`)
-              }
-              style={[a.rounded_full]}
-              onPress={profileShadow.viewer?.following ? unfollow : follow}>
-              <ButtonIcon
-                position="left"
-                icon={profileShadow.viewer?.following ? Check : Plus}
-              />
-              <ButtonText>
-                {profileShadow.viewer?.following
-                  ? _(msg`Following`)
-                  : _(msg`Follow`)}
-              </ButtonText>
-            </Button>
+            <View style={[a.flex_row, a.align_center, a.gap_xs]}>
+              <Button
+                size="small"
+                color={
+                  profileShadow.viewer?.following ? 'secondary' : 'primary'
+                }
+                variant="solid"
+                label={
+                  profileShadow.viewer?.following
+                    ? _(msg`Following`)
+                    : _(msg`Follow`)
+                }
+                style={[a.rounded_full]}
+                onPress={profileShadow.viewer?.following ? unfollow : follow}>
+                <ButtonIcon
+                  position="left"
+                  icon={profileShadow.viewer?.following ? Check : Plus}
+                />
+                <ButtonText>
+                  {profileShadow.viewer?.following
+                    ? _(msg`Following`)
+                    : _(msg`Follow`)}
+                </ButtonText>
+              </Button>
+              <Button
+                size="small"
+                color="secondary"
+                variant="solid"
+                shape="round"
+                label={isMuted ? _(msg`Unmute account`) : _(msg`Mute account`)}
+                onPress={() => void onPressMute()}>
+                <ButtonIcon icon={Mute} />
+              </Button>
+              <Button
+                size="small"
+                color="secondary"
+                variant="solid"
+                shape="round"
+                label={_(msg`Block account`)}
+                onPress={onPressBlock}>
+                <ButtonIcon icon={PersonX} />
+              </Button>
+            </View>
           ))}
       </View>
 

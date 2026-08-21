@@ -174,13 +174,13 @@ msgid "{0, plural, one {1 more post} other {# more posts}}"
 msgstr ""
 
 #. placeholder {0}: profile.followersCount || 0
-#: src/components/ProfileHoverCard/index.web.tsx:444
+#: src/components/ProfileHoverCard/index.web.tsx:572
 #: src/screens/Profile/Header/Metrics.tsx:22
 msgid "{0, plural, one {follower} other {followers}}"
 msgstr ""
 
 #. placeholder {0}: profile.followsCount || 0
-#: src/components/ProfileHoverCard/index.web.tsx:448
+#: src/components/ProfileHoverCard/index.web.tsx:576
 #: src/screens/Profile/Header/Metrics.tsx:26
 msgid "{0, plural, one {following} other {following}}"
 msgstr ""
@@ -629,7 +629,7 @@ msgstr ""
 msgid "{firstAuthorName} verified you"
 msgstr ""
 
-#: src/components/ProfileHoverCard/index.web.tsx:572
+#: src/components/ProfileHoverCard/index.web.tsx:722
 msgid "{following} following"
 msgstr ""
 
@@ -1024,6 +1024,10 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
+#: src/components/ProfileHoverCard/index.web.tsx:424
+msgid "Account blocked"
+msgstr "Account blocked"
+
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:427
 #: src/screens/Messages/components/RequestButtons.tsx:104
 #: src/screens/Messages/ConversationSettings/MemberMenu.tsx:122
@@ -1044,6 +1048,10 @@ msgstr ""
 #: src/lib/strings/errors.ts:37
 msgid "Account is deactivated"
 msgstr ""
+
+#: src/components/ProfileHoverCard/index.web.tsx:551
+msgid "Account muted"
+msgstr "Account muted"
 
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:470
 #: src/view/com/profile/ProfileMenu.tsx:152
@@ -1080,6 +1088,10 @@ msgstr ""
 msgctxt "toast"
 msgid "Account unfollowed"
 msgstr ""
+
+#: src/components/ProfileHoverCard/index.web.tsx:548
+msgid "Account unmuted"
+msgstr "Account unmuted"
 
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:450
 #: src/view/com/profile/ProfileMenu.tsx:139
@@ -2112,6 +2124,7 @@ msgstr "Block {displayName}"
 #: src/components/dms/ConvoMenu.tsx:288
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:756
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:758
+#: src/components/ProfileHoverCard/index.web.tsx:654
 #: src/screens/Messages/components/RequestButtons.tsx:154
 #: src/screens/Messages/components/RequestButtons.tsx:156
 #: src/view/com/profile/ProfileMenu.tsx:464
@@ -5244,8 +5257,8 @@ msgstr "Focus the search field"
 
 #. User is not following this account, click to follow
 #: src/components/ProfileCard.tsx:546
-#: src/components/ProfileHoverCard/index.web.tsx:495
-#: src/components/ProfileHoverCard/index.web.tsx:506
+#: src/components/ProfileHoverCard/index.web.tsx:626
+#: src/components/ProfileHoverCard/index.web.tsx:637
 #: src/screens/Messages/ConversationSettings/Member.tsx:170
 #: src/screens/PostThread/components/ThreadItemAnchorFollowButton.tsx:157
 #: src/screens/Profile/Header/ProfileHeaderStandard.tsx:409
@@ -5360,8 +5373,8 @@ msgstr ""
 #. User is following this account, click to unfollow
 #. User is following this account, click to unfollow
 #: src/components/ProfileCard.tsx:537
-#: src/components/ProfileHoverCard/index.web.tsx:494
-#: src/components/ProfileHoverCard/index.web.tsx:505
+#: src/components/ProfileHoverCard/index.web.tsx:625
+#: src/components/ProfileHoverCard/index.web.tsx:636
 #: src/screens/PostThread/components/ThreadItemAnchorFollowButton.tsx:160
 #: src/screens/Profile/Header/ProfileHeaderStandard.tsx:405
 #: src/screens/VideoFeed/index.tsx:864
@@ -7600,6 +7613,7 @@ msgstr "Mute {0}"
 
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:739
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:745
+#: src/components/ProfileHoverCard/index.web.tsx:645
 #: src/view/com/profile/ProfileMenu.tsx:443
 #: src/view/com/profile/ProfileMenu.tsx:450
 msgid "Mute account"
@@ -12170,6 +12184,8 @@ msgstr ""
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:432
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:455
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:475
+#: src/components/ProfileHoverCard/index.web.tsx:429
+#: src/components/ProfileHoverCard/index.web.tsx:557
 #: src/screens/Messages/ConversationSettings/Member.tsx:71
 #: src/screens/Messages/ConversationSettings/MemberMenu.tsx:114
 #: src/screens/Messages/ConversationSettings/MemberMenu.tsx:127
@@ -13019,6 +13035,7 @@ msgstr "Unmute {0}"
 
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:738
 #: src/components/PostControls/PostMenu/PostMenuItems.tsx:744
+#: src/components/ProfileHoverCard/index.web.tsx:645
 #: src/view/com/profile/ProfileMenu.tsx:442
 #: src/view/com/profile/ProfileMenu.tsx:448
 msgid "Unmute account"
@@ -13562,7 +13579,7 @@ msgstr "View {displayName}’s profile"
 msgid "View {publicationTitle}"
 msgstr "View {publicationTitle}"
 
-#: src/components/ProfileHoverCard/index.web.tsx:479
+#: src/components/ProfileHoverCard/index.web.tsx:607
 msgid "View blocked user's profile"
 msgstr ""
 
@@ -13615,9 +13632,9 @@ msgstr ""
 msgid "View post"
 msgstr ""
 
-#: src/components/ProfileHoverCard/index.web.tsx:465
-#: src/components/ProfileHoverCard/index.web.tsx:485
-#: src/components/ProfileHoverCard/index.web.tsx:512
+#: src/components/ProfileHoverCard/index.web.tsx:593
+#: src/components/ProfileHoverCard/index.web.tsx:613
+#: src/components/ProfileHoverCard/index.web.tsx:662
 #: src/view/com/posts/PostFeedErrorMessage.tsx:185
 #: src/view/com/util/PostMeta.tsx:92
 #: src/view/com/util/PostMeta.tsx:119
